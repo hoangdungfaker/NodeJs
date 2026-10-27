@@ -1,32 +1,34 @@
-const compression = require("compression");
-const express = require("express");
-const {
-    default: helmet
-} = require("helmet");
-const morgan = require("morgan");
-const app = express()
+require('dotenv').config()
+const compression = require('compression');
+const express = require('express');
+const helmet = require('helmet');
+const morgan = require('morgan');
 
-// init middlewares
+
+const app = express();
+
+// Init middlewares
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(compression())
-// init db
+app.use(compression());
+app.use(express.json());
 
+// Init database
+require('./dbs/init.mongodb');
 
-// innit route
-app.get(`/`, (req, res, next) => {
-    const strCompress = "Hello Compress"
-    res.status(500).json({
-        message: "Welcome Morgan",
-        metadata: strCompress.repeat(100000)
-    })
-})
+// Init monitoring
+// const {
+//     checkOverLoad
+// } = require('./helpers/check.connect');
 
-// handling error
+// checkOverLoad();
 
-
-
-
-
+// Init route
+app.get('/', (req, res) => {
+    res.status(200).json({
+        message: 'Welcome Morgan',
+        metadata: 'Hello Compress'.repeat(100)
+    });
+});
 
 module.exports = app;
