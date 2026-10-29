@@ -24,11 +24,6 @@ require('./dbs/init.mongodb');
 // checkOverLoad();
 
 // Init route
-app.get('/', (req, res) => {
-    res.status(200).json({
-        message: 'Welcome Morgan',
-        metadata: 'Hello Compress'.repeat(100)
-    });
-});
+app.use('', require('./router/index'))
 
 module.exports = app;
