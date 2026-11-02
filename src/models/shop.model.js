@@ -26,7 +26,7 @@
         status: {
             type: String,
             enum: ['active', 'inactive'],
-            default: false
+            default: 'active'
         },
         verify: {
             type: Schema.Types.Boolean,
