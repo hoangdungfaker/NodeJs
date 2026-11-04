@@ -6,6 +6,7 @@ const HEADER = {
 const {findById} = require('../services/apikey.service')
 const apiKey = async (req, res, next) => {
     try {
+        // phần này thì key vẫn là key của người dùng gửi lên
         const key = req.headers[HEADER.API_KEY]?.toString()
         if (!key) {
             return res.status(403).json({
@@ -15,6 +16,7 @@ const apiKey = async (req, res, next) => {
         }
         // check key in database
         const objKey = await findById(key)
+        // phần này thì key đã bị ghi đè bằng crypto.randomBytes(64).toString('hex') trong hàm findById
         if (!objKey) {
             return res.status(403).json({
                 code: 'xxx',
@@ -52,7 +54,14 @@ const permission = (permission) => {
 
     }
 }
+
+const asyncHandler = (fn) => {
+    return (req, res, next) => {
+        fn(req, res, next).catch(next)
+    };
+}
 module.exports = {
     apiKey: apiKey,
-    permission: permission
+    permission: permission,
+    asyncHandler: asyncHandler
 }
