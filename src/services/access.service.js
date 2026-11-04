@@ -34,13 +34,13 @@
                     //created privateKey (để cho người dùng chúng ta không lưu ( dùng để đăng ký  token )), publickey(xác nhận token)
                     const {privateKey, publicKey} = crypto.generateKeyPairSync('rsa', {
                         modulusLength: 4096,
-                        publicKeyEncoding: {
+                        publicKeyEncoding: { // hàm này để chuyển publicKey sang dạng string để lưu vào database
                             type: 'pkcs1',
                             format: 'pem'
                         },
-                        privateKeyEncoding: {
-                            type: 'pkcs1',
-                            format: 'pem'
+                        privateKeyEncoding: { // hàm này để chuyển privateKey sang dạng string để lưu vào database
+                            type: 'pkcs1', // định dạng của privateKey
+                            format: 'pem' // định dạng của privateKey
                         }
                     })
                     console.log({ privateKey, publicKey })

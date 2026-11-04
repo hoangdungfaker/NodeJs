@@ -1,9 +1,10 @@
 ### signup
 POST http://localhost:2006/v1/api/shop/signup
 Content-Type: application/json
+x-api-key: 12345678901551
 
 {
   "name": "Shop A",
-  "email": "shope04@gmail.com",
-  "password": "123456"
+  "email": "shope10119@gmail.com",
+  "password": "123456"  
 }
