@@ -9,7 +9,7 @@ router.use(apiKey)
 // check permission
 router.use(permission('0001'))
 router.use('/v1/api', require('./access/index'))
-// xu ly hander error
+// xu ly hander error 
 router.use((req, res, next) => {
     const error = new Error('Not Found')
     error.status = 404
