@@ -15,9 +15,18 @@ const keyTokenSchema = new Schema({
         type: String,
         required: true
     },
-    refreshToken: {
+    privateKey: {
+        type: String,
+        required: true
+    },
+    refreshTokensUsed: { // nhung refreshToken da su dung roi, neu co refreshToken moi thi push vao array nay de check
         type: Array,
         default: []
+    },
+    refreshToken: { // freshToken hien tai, neu co refreshToken moi thi update lai
+        type: String,
+        default: null,
+        required: true
     }
 }, {
     collection: COLLECTION_NAME,

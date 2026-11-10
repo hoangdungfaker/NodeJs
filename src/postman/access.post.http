@@ -8,3 +8,12 @@ x-api-key: 12345678901551
   "email": "shope1011f4455d9@gmail.com",
   "password": "123456"  
 }
+### login
+POST http://localhost:2006/v1/api/shop/login
+Content-Type: application/json
+x-api-key: 12345678901551
+
+{
+  "email": "shope1011f4455d9@gmail.com",
+  "password": "123456"  
+}

@@ -4,16 +4,53 @@
     const crypto = require('crypto')
     const keyTokenService = require('./keyToken.service')
     const { createTokenPair } = require('../auth/authUtils')
-    const { BadRequestError } = require('../core/error.response')
+const { BadRequestError } = require('../core/error.response')
+const { findByEMail } = require('./shop.service')
     const RoleShop = {
         SHOP: 'SHOP',
         WRITER: "WRITER",
         EDITOR: "EDITOR",
         ADMIN: ' ADMIN'
     }
-    class AccessService {
+    
+class AccessService {
+        /*
+        1- check email in dbs
+        2- match password
+        3. create AT, RT and save
+        4. generate tokens
+        5. get data return login
+        */
+        static login = async ({ email, password, refreshToken = null }) => {
+            const foundShop = await findByEMail({ email })
+            if (!foundShop) throw new BadRequestError('Shop not registered')
+            
+            const match = await bcrypt.compare(password, foundShop.password)
+            if (!match) throw new BadRequestError('Authentication error: password not match')
+            
+            const privateKey = crypto.randomBytes(64).toString('hex');
+            const publicKey = crypto.randomBytes(64).toString('hex');
+
+            const tokens = await createTokenPair({ userId: foundShop._id, email }, publicKey, privateKey)
+
+            await keyTokenService.createKeyToken({
+                userId: foundShop._id,
+                publicKey,
+                privateKey,
+                refreshToken: tokens.refreshToken
+            })
+            return {
+                shop: {
+                    _id: foundShop._id,
+                    email: foundShop.email,
+                    name: foundShop.name,
+                },
+                tokens
+            }
+            
+        }
+   
         static signup = async ({ name, email, password }) => {
-                
                 // step1: check email exists
                 const holderShop = await shopModel.findOne({ email}).lean()
                 if (holderShop) {
@@ -29,25 +66,28 @@
                 // nếu tạo thành công tạo ra một khóa  public , private
                 if (newShop) {
                     //created privateKey (để cho người dùng chúng ta không lưu ( dùng để đăng ký  token )), publickey(xác nhận token)
-                    const {privateKey, publicKey} = crypto.generateKeyPairSync('rsa', {
-                        modulusLength: 4096,
-                        publicKeyEncoding: { // hàm này để chuyển publicKey sang dạng string để lưu vào database
-                            type: 'pkcs1',
-                            format: 'pem'
-                        },
-                        privateKeyEncoding: { // hàm này để chuyển privateKey sang dạng string để lưu vào database
-                            type: 'pkcs1', // định dạng của privateKey
-                            format: 'pem' // định dạng của privateKey
-                        }
-                    })
-                    console.log({ privateKey, publicKey })
+                    // const {privateKey, publicKey} = crypto.generateKeyPairSync('rsa', {
+                    //     modulusLength: 4096,
+                    //     publicKeyEncoding: { // hàm này để chuyển publicKey sang dạng string để lưu vào database
+                    //         type: 'pkcs1',
+                    //         format: 'pem'
+                    //     },
+                    //     privateKeyEncoding: { // hàm này để chuyển privateKey sang dạng string để lưu vào database
+                    //         type: 'pkcs1', // định dạng của privateKey
+                    //         format: 'pem' // định dạng của privateKey
+                    //     }
+                    // })
+                    const privateKey = crypto.randomBytes(64).toString('hex');
+                    const publicKey = crypto.randomBytes(64).toString('hex');
+
                     // hàm này để chuyển publicKey sang dạng string để lưu vào database
-                    const publicKeyString = await keyTokenService.createKeyToken({
+                    const keyStore = await keyTokenService.createKeyToken({
                         userId: newShop._id, 
-                        publicKey
+                        publicKey,
+                        privateKey
                     })
-                    if (!publicKeyString) {
-                        throw new BadRequestError('PublicKeyString error')
+                    if (!keyStore) {
+                        throw new BadRequestError('KeyStore error')
                     }
 
         
