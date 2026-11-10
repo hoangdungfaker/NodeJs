@@ -17,3 +17,9 @@ x-api-key: 12345678901551
   "email": "shope1011f4455d9@gmail.com",
   "password": "123456"  
 }
+### logout
+POST http://localhost:2006/v1/api/shop/logout
+Content-Type: application/json
+x-api-key: 12345678901551
+x-client-id: 6aebd6749348f1e99733e9fe
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0MzUwODgzLCJleHAiOjE3OTQ1MjM2ODN9.GK3uGBI8Z6wK2j5t3QNB38xtd7GFbNvp7onojpFc4_A

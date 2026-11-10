@@ -1,5 +1,7 @@
 'use strict'
 
+const { ReasonPhrases } = require("http-status-codes");
+
 const statusCode = {
     FORBIDDEN: 403,
     CONFLICT: 409,
@@ -26,7 +28,19 @@ class BadRequestError extends ErrorResponse{
         super(message, status )
     }
 }
+class AuthFailureError extends ErrorResponse{
+    constructor(message = ReasonPhrases.UNAUTHORIZED, status = statusCode.UNAUTHORIZED) {
+        super(message, status )
+    }
+}
+class NotFoundError extends ErrorResponse{
+    constructor(message = ReasonPhrases.NOT_FOUND, status = statusCode.NOT_FOUND) {
+        super(message, status )
+    }
+}
 module.exports = {
     ConflictRequestError,
-    BadRequestError
+    BadRequestError,
+    AuthFailureError,
+    NotFoundError
 }
