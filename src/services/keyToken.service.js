@@ -32,6 +32,17 @@ static createKeyToken = async ({userId,publicKey, privateKey,refreshToken}) => {
     static removeKeyById = async (id) => {
         return await keytokenModel.deleteOne({user: id});
     }
+    static findByRefreshTokenUsed = async (refreshToken) => {
+        return await keytokenModel.findOne({
+            refreshTokensUsed: refreshToken
+        })
+    }
+    static deleteKeyById = async (userId) => {
+        return await keytokenModel.deleteOne({ user: userId });
+    }
+    static findByRefreshToken = async (refreshToken) => {
+        return await keytokenModel.findOne({refreshToken})
+    }
 
 }
 
