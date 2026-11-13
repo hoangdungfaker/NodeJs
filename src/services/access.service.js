@@ -43,15 +43,9 @@ class AccessService {
         const tokens = await createTokenPair({ userId, email }, holderToken.publicKey, holderToken.privateKey)
         
         // update token
-        await holderToken.save({
-            $set: {
-                refreshToken : tokens.refreshToken
-            },
-            $addToSet: {
-                refreshTokensUsed: refreshToken
-            }
-
-        })
+        holderToken.refreshToken = tokens.refreshToken;
+        holderToken.refreshTokensUsed = [...holderToken.refreshTokensUsed, refreshToken];
+        await holderToken.save();
         return {
             user: { userId, email },
             tokens
