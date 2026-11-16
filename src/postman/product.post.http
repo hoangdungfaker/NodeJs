@@ -1,0 +1,22 @@
+### create Product
+
+POST http://localhost:2006/v1/api/product
+Content-Type: application/json
+x-api-key: 12345678901551
+x-client-id: 6aebd6749348f1e99733e9fe
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0ODI0OTY1LCJleHAiOjE3OTQ5OTc3NjV9.EnhQpJ8OikpHakdaevueH7qgp8iRv0rRaks_0d7rqPg
+
+{
+  "product_name": "New Jeans",
+  "product_description": "High-quality denim jeans",
+  "product_price": 50,
+  "product_shop": "6aebd6749348f1e99733e9fe",
+  "product_type": "Clothing",
+  "product_thumb": "product_thumb",
+  "product_quantity": 5,
+  "product_attributes": {
+    "brand": "Levi's",
+    "size": "L",
+    "material": "Denim"
+  }
+}

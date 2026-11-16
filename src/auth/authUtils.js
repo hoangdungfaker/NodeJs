@@ -31,6 +31,9 @@ const createTokenPair = async (payload, publicKey, privateKey) => {
         return null;
     }
 }
+const authenticationV2 = asyncHandler(async (req, res, next) => {
+    
+})
 const authentication = asyncHandler(async (req, res, next) => {
     /*
         1. check UserId missing
