@@ -8,7 +8,8 @@ const { token } = require('morgan');
 const HEADER = {
     API_KEY: 'x-api-key',
     AUTHORIZATION: 'authorization',
-    CLIENT_ID: 'x-client-id'
+    CLIENT_ID: 'x-client-id',
+    REFRESHTOKEN:'refreshtoken'
 }
 const createTokenPair = async (payload, publicKey, privateKey) => {
     try {
@@ -33,6 +34,28 @@ const createTokenPair = async (payload, publicKey, privateKey) => {
 }
 const authenticationV2 = asyncHandler(async (req, res, next) => {
     
+    const userId = req.headers[HEADER.CLIENT_ID];
+    if (!userId) throw new AuthFailureError("Invalid request ");
+
+    //2. get accessToken
+    const keyStore = await keyTokenService.findByUserId(userId);
+    if (!keyStore) throw new NotFoundError("Not found keyStore");
+
+    if (req.headers[HEADER.REFRESHTOKEN]) {
+        try {
+            const refreshtoken = req.headers[HEADER.REFRESHTOKEN]
+            const decodeUser = JWT.verify(refreshtoken, keyStore.privateKey);
+            if (userId !== decodeUser.userId) throw new AuthFailureError("Invalid user");
+            req.keyStore = keyStore;
+            req.user = decodeUser;
+            req.refreshtoken = refreshtoken;
+            return next()
+            
+        } catch (error) {
+            throw error;
+        }
+    }
+
 })
 const authentication = asyncHandler(async (req, res, next) => {
     /*
@@ -71,5 +94,6 @@ const verifyJWT = async (token, keySecret) => {
 module.exports = {
     createTokenPair,
     authentication,
-    verifyJWT
+    verifyJWT,
+    authenticationV2
 }
