@@ -56,6 +56,18 @@ const authenticationV2 = asyncHandler(async (req, res, next) => {
         }
     }
 
+    const accessToken = req.headers[HEADER.AUTHORIZATION];
+    if (!accessToken) throw new AuthFailureError("Invalid request");
+
+    try {
+        const decodeUser = JWT.verify(accessToken, keyStore.publicKey);
+        if (userId !== decodeUser.userId) throw new AuthFailureError("Invalid user");
+        req.keyStore = keyStore;
+        req.user = decodeUser;
+        return next();
+    } catch (error) {
+        throw error;
+    }
 })
 const authentication = asyncHandler(async (req, res, next) => {
     /*

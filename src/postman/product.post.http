@@ -7,16 +7,50 @@ x-client-id: 6aebd6749348f1e99733e9fe
 authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0ODgzNTUyLCJleHAiOjE3OTUwNTYzNTJ9.KPo8h0flIBhQ86h5TtOjTt1Fj3zGYaQDI1wBYC6R0N4
 
 {
-  "product_name": "New Jeans",
-  "product_description": "High-quality denim jeans",
-  "product_price": 50,
-  "product_shop": "6aebd6749348f1e99733e9fe",
+  "product_name": "Băng Quấn Bảo Vệ Khuỷu Tay Co Giãn Tốt Tiện Dụng Khi Chơi Thể Thao Cho Nam",
+  "product_thumb": "https://salt.tikicdn.com/cache/100x100/ts/product/d6/4f/c3/71f089390f605d172b54edf6aaa1877e.jpg.webp",
+  "product_description": "Áo thun nam MRM kiểu dáng Regular fit tôn dáng cơ thể, làm nổi bật form người mặc thêm nam tính, khỏe khoắn mà vẫn thoải mái vận động.",
+  "product_price": 1234.000,
+  "product_quantity": 23,
   "product_type": "Clothing",
-  "product_thumb": "product_thumb",
-  "product_quantity": 5,
   "product_attributes": {
-    "brand": "Levi's",
-    "size": "L",
-    "material": "Denim" 
+    "brand": "MRM VietNam China",
+    "size": "XL",
+    "material": "Thun"
   }
 }
+
+### Get All Drafts for Shop
+GET http://localhost:2006/v1/api/product/drafts/all
+Content-Type: application/json
+x-api-key: 12345678901551
+x-client-id: 6aebd6749348f1e99733e9fe
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0ODgzNTUyLCJleHAiOjE3OTUwNTYzNTJ9.KPo8h0flIBhQ86h5TtOjTt1Fj3zGYaQDI1wBYC6R0N4
+
+
+
+### get ALL publish for shop
+GET http://localhost:2006/v1/api/product/published/all
+Content-Type: application/json
+x-api-key: 12345678901551
+x-client-id: 6aebd6749348f1e99733e9fe
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0ODgzNTUyLCJleHAiOjE3OTUwNTYzNTJ9.KPo8h0flIBhQ86h5TtOjTt1Fj3zGYaQDI1wBYC6R0N4
+
+
+### PUT 1 product draft to publish for shop
+POST http://localhost:2006/v1/api/product/publish/6afbf71bac75d28746cb3937 
+Content-Type: application/json
+x-api-key: 12345678901551
+x-client-id: 6aebd6749348f1e99733e9fe
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0ODgzNTUyLCJleHAiOjE3OTUwNTYzNTJ9.KPo8h0flIBhQ86h5TtOjTt1Fj3zGYaQDI1wBYC6R0N4
+
+### PUT unPublish
+POST http://localhost:2006/v1/api/product/unPublish/6afbf71bac75d28746cb3937 
+Content-Type: application/json
+x-api-key: 12345678901551
+x-client-id: 6aebd6749348f1e99733e9fe
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0ODgzNTUyLCJleHAiOjE3OTUwNTYzNTJ9.KPo8h0flIBhQ86h5TtOjTt1Fj3zGYaQDI1wBYC6R0N4
+
+
+
+

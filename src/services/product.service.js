@@ -65,4 +65,19 @@ class Electronics extends Product {
     }
 
 }
+class Furnitures extends Product {
+    async createProduct() {
+        const newFurnitures = await electronics.create({
+            ...this.product_attributes,
+            product_shop: this.product_shop
+
+        })
+        if (!newFurnitures) throw new BadRequestError("create new Electronics error")
+
+        const newProduct = await super.createProduct(newFurnitures._id)
+        if (!newProduct) throw new BadRequestError("create  new product error")
+        return newProduct;
+    }
+
+}
 module.exports = ProductFactory;
