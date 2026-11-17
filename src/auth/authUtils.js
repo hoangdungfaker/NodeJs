@@ -70,7 +70,7 @@ const authentication = asyncHandler(async (req, res, next) => {
     if (!userId) throw new AuthFailureError("Invalid request ");
     
     //2. get accessToken
-    const keyStore = await keyTokenService.findByUserId(userId);
+    const keyStore = await keyTokenService.findByUserId(userId); // keyToken có thể tìm kiếm  bằng userId nhưng không lưu userId
     if (!keyStore) throw new NotFoundError("Not found keyStore");
     
     //3. verify token
@@ -80,7 +80,8 @@ const authentication = asyncHandler(async (req, res, next) => {
     try {
         const decodeUser = JWT.verify(accessToken, keyStore.publicKey);
         if (userId !== decodeUser.userId) throw new AuthFailureError("Invalid user");
-        req.keyStore = keyStore;
+        req.keyStore = keyStore
+        req.userId = userId
         return next();
         
     } catch (error) {

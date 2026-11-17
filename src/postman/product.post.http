@@ -4,7 +4,7 @@ POST http://localhost:2006/v1/api/product
 Content-Type: application/json
 x-api-key: 12345678901551
 x-client-id: 6aebd6749348f1e99733e9fe
-authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0ODI0OTY1LCJleHAiOjE3OTQ5OTc3NjV9.EnhQpJ8OikpHakdaevueH7qgp8iRv0rRaks_0d7rqPg
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk0ODgzNTUyLCJleHAiOjE3OTUwNTYzNTJ9.KPo8h0flIBhQ86h5TtOjTt1Fj3zGYaQDI1wBYC6R0N4
 
 {
   "product_name": "New Jeans",
@@ -17,6 +17,6 @@ authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkz
   "product_attributes": {
     "brand": "Levi's",
     "size": "L",
-    "material": "Denim"
+    "material": "Denim" 
   }
 }

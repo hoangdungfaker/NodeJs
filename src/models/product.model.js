@@ -1,12 +1,15 @@
 'use strict'
-const { Schema, model } = require("mongoose")
+const {
+    Schema,
+    model
+} = require("mongoose")
 const DOCUMENT_NAME = 'Product'
 const COLLECTION_NAME = 'Products'
 
 const productSchema = new Schema({
     product_name: {
         type: String,
-        required:  true
+        required: true
     },
     product_thumb: {
         type: String,
@@ -24,7 +27,7 @@ const productSchema = new Schema({
     product_type: {
         type: String,
         required: true,
-        enum: ['Electronics','Clothing', 'Furniture']
+        enum: ['Electronics', 'Clothing', 'Furniture']
     },
     product_shop: {
         type: Schema.Types.ObjectId,
@@ -45,7 +48,11 @@ const clothingSchema = new Schema({
         required: true
     },
     size: String,
-    material: String
+    material: String,
+    product_shop: {
+        type: Schema.Types.ObjectId,
+        ref: 'Shop'
+    },
 }, {
     collection: 'clothes',
     timestamps: true
@@ -57,7 +64,11 @@ const electronicSchema = new Schema({
         required: true
     },
     model: String,
-    color: String
+    color: String,
+    product_shop: {
+        type: Schema.Types.ObjectId,
+        ref: 'Shop'
+    }
 }, {
     collection: 'electronics',
     timestamps: true
@@ -66,5 +77,5 @@ const electronicSchema = new Schema({
 module.exports = {
     product: model(DOCUMENT_NAME, productSchema),
     electronics: model('electronic', electronicSchema),
-    clothing : model('clothing', clothingSchema)
+    clothing: model('clothing', clothingSchema)
 }

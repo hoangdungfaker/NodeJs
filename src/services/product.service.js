@@ -30,17 +30,21 @@ class Product {
         this.product_attributes = product_attributes;
         this.product_quantity = product_quantity;
     }
-    async createProduct() {
-        return await product.create(this)
+    async createProduct(product_id) {
+        return await product.create({...this,_id: product_id})
     }
 }
 
 class Clothing extends Product {
     async createProduct() {
-        const newClothing = await clothing.create(this.product_attributes)
+        const newClothing = await clothing.create({
+            ...this.product_attributes,
+            product_shop : this.product_shop
+        }) 
+        // có một lỗi ở đây là id của clothing không cùng id của product
         if (!newClothing) throw new BadRequestError("create new clothes error")
         
-        const newProduct = await super.createProduct()
+        const newProduct = await super.createProduct(newClothing._id)
         if (!newProduct) throw new BadRequestError("create  new product error")
         return newProduct;
     }
@@ -48,10 +52,14 @@ class Clothing extends Product {
 }
 class Electronics extends Product {
     async createProduct() {
-        const newElectronics = await electronics.create(this.product_attributes)
+        const newElectronics = await electronics.create({
+            ...this.product_attributes,
+            product_shop: this.product_shop
+
+        })
         if (!newElectronics) throw new BadRequestError("create new Electronics error")
 
-        const newProduct = await super.createProduct()
+        const newProduct = await super.createProduct(newElectronics._id)
         if (!newProduct) throw new BadRequestError("create  new product error")
         return newProduct;
     }
