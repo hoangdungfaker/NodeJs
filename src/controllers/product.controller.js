@@ -68,6 +68,28 @@ class ProductController {
         }).send(res)
     }
 
+    findAllProudcts = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'Get list findAllProudcts success!',
+            metadata: await ProductServiceV2.findAllProudcts(req.query)
+        }).send(res)
+    }
+
+    // tim kiem 1 san pham bang product_id 
+    findProduct = async (req, res, next) => {
+        new SuccessResponse({
+            message: 'Get list findProduct success!',
+            metadata: await ProductServiceV2.findProduct({
+                product_id: req.params.product_id
+            })
+        }).send(res)
+    }
+
+
+
+
+
+
     // END QUERY //
 }
 

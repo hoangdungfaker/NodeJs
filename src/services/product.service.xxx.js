@@ -4,7 +4,9 @@ const { product, clothing, electronics, furniture } = require('../models/product
 const { BadRequestError } = require('../core/error.response')
 const { findAllDraftsForShop, findAllPublishForShop,
     unPublishProductByShop, publishProductByShop,
-    searchProductByUser
+    searchProductByUser,
+    findAllProducts,
+    findProduct: findProductRepo
 } = require('../models/repositories/product.repo')
 
 // define Factory class to create product
@@ -57,7 +59,16 @@ class ProductFactory {
     }
 
 
+    // TÌM KIẾM TOÀN BỘ SẢN PHẨM (USER)
+    
+    static async findAllProudcts({ limit = 50, sort = 'ctime', page = 1, filter = { isPublished: true } }) {
+        return await findAllProducts({limit, sort, page, filter,select : ['product_name', 'product_price','product_thumb']})
+    }
 
+    // tìm kiếm 1 sản phẩm theo id 
+    static async findProduct({ product_id }) {
+        return await findProductRepo({product_id, unSelect : ['__v']})
+    }
 
 }
 

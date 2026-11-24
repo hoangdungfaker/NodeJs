@@ -28,8 +28,5 @@ router.use((error, req, res, next) => {
     })
 })
 
-const a = 10;
-const b = 5;
-var c = a + b
 
 module.exports = router;

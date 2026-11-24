@@ -7,6 +7,8 @@ const { authentication, authenticationV2 } = require('../../auth/authUtils')
 const router = express.Router()
 // seach product
 router.get('/search/:keySearch', asyncHandler(productController.getListSearchProduct))
+router.get('', asyncHandler(productController.findAllProudcts))
+router.get('/:product_id', asyncHandler(productController.findProduct))
 
 
 // authentication //
