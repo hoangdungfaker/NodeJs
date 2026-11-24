@@ -3,7 +3,9 @@
 const { product, clothing, electronics, furniture } = require('../models/product.model')
 const { BadRequestError } = require('../core/error.response')
 const { findAllDraftsForShop, findAllPublishForShop,
-    unPublishProductByShop, publishProductByShop } = require('../models/repositories/product.repo')
+    unPublishProductByShop, publishProductByShop,
+    searchProductByUser
+} = require('../models/repositories/product.repo')
 
 // define Factory class to create product
 class ProductFactory {
@@ -47,6 +49,11 @@ class ProductFactory {
     //unPublish
     static async unPublishProductByShop({ product_shop, product_id }) {
         return await unPublishProductByShop({product_shop, product_id})
+    }
+
+    // search product (ko can verify token)
+    static async searchProducts({keySearch}) {
+        return await searchProductByUser({keySearch})
     }
 
 

@@ -8,8 +8,10 @@ const router = express.Router()
 router.use(apiKey)
 // check permission
 router.use(permission('0001'))
-router.use('/v1/api', require('./access/index'))
+
 router.use('/v1/api/product', require('./product/index'))
+router.use('/v1/api', require('./access/index'))
+
 // xu ly hander error 
 router.use((req, res, next) => {
     const error = new Error('Not Found')
@@ -25,5 +27,9 @@ router.use((error, req, res, next) => {
         message: error.message
     })
 })
+
+const a = 10;
+const b = 5;
+var c = a + b
 
 module.exports = router;
