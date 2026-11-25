@@ -66,3 +66,20 @@ x-api-key: 12345678901551
 GET http://localhost:2006/v1/api/product/6afbf71bac75d28746cb3937
 Content-Type: application/json
 x-api-key: 12345678901551
+
+
+### update product
+PATCH http://localhost:2006/v1/api/product/6afbf71bac75d28746cb3937 
+Content-Type: application/json
+x-api-key: 12345678901551
+x-client-id: 6aebd6749348f1e99733e9fe
+authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YWViZDY3NDkzNDhmMWU5OTczM2U5ZmUiLCJlbWFpbCI6InNob3BlMTAxMWY0NDU1ZDlAZ21haWwuY29tIiwiaWF0IjoxNzk1NDg2ODI3LCJleHAiOjE3OTU2NTk2Mjd9.3Kknwt7eHKsFjAVvGrAujQusEcmkgwCzpqaEyck6-B0
+
+{
+  "product_attributes": {
+      "size": "XXL 1"
+    },
+  "product_type": "Clothing",
+  "product_name": "Tên sản phẩm mới cập nhật 45",
+  "product_price": null
+}

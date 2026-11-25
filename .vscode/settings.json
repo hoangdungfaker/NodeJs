@@ -1,1 +1,12 @@
-{}
+{
+    "javascript.suggestionActions.enabled": true,
+    "javascript.suggest.autoImports": true,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    "files.associations": {
+        "*.xxx.js": "javascript"
+    }
+}
